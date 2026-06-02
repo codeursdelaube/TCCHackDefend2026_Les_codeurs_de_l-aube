@@ -82,4 +82,23 @@ with open("monument.json", "r", encoding="utf-8") as fichier:
 with open("hotel.json", "r", encoding="utf-8") as fichier_hotel:
     BASE_HOTEL = json.load(fichier_hotel)
 
+# ==========================================
+# 5. MODÈLES DE DONNÉES (PYDANTIC)
+# ==========================================
+
+class Monument(BaseModel):
+    """ Modèle de validation pour la structure d'un Monument """
+    id: int
+    nom: str
+    histoire: str
+    latitude: float
+    longitude: float
+
+class hotel(BaseModel):
+    """ Modèle de validation pour la structure d'un Hôtel """
+    nom: str
+    latitude: float
+    longitude: float
+    prix_nuit: int
+
 
