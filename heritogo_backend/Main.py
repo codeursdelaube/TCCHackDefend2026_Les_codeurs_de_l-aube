@@ -189,3 +189,17 @@ async def predict_monument(file: UploadFile = File(..., description="photo prise
         data_tour = data_touristique.get("monument", "").lower()
 
         donnees_finales = None
+
+         # 7. Algorithme de réconciliation : Recherche si le monument trouvé par l'IA existe dans notre JSON local
+
+        for m in BASE_MONUMENT:
+         # Vérification croisée par inclusion de chaînes (insensible à la casse)
+             if data_tour in m["nom"].lower() or m["nom"].lower() in data_tour:
+                donnees_finales = {
+                    "monument": m["nom"],
+                    "histoire": m["histoire"],
+                    "latitude": m["latitude"],
+                    "longitude": m["longitude"],
+                    "source": "local_database" # Indique que la donnée vient du fichier local sûr
+            }
+             break
