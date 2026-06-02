@@ -66,8 +66,8 @@ def verifier_cle_api(api_key_recue: str = Depends(api_key_header)):
         return api_key_recue
 # Si la clé est incorrecte ou absente, on bloque immédiatement la requête
     raise HTTPException(
-    status_code=403,
-    detail="Accès interdit: Clé API invalide ou manquante"
+            status_code=403,
+            detail="Accès interdit: Clé API invalide ou manquante"
     )
 
 # ==========================================
@@ -203,3 +203,21 @@ async def predict_monument(file: UploadFile = File(..., description="photo prise
                     "source": "local_database" # Indique que la donnée vient du fichier local sûr
             }
              break
+        # 8. Système de secours (Fallback) : Si non trouvé en base locale, on adopte les coordonnées génériques du Togo
+
+        if not donnees_finales:
+             donnees_finales = {
+                 "monument": data_touristique.get("monument", "Monument inconnu"),
+                 "histoire": data_touristique.get("histoire", "Monument identifié au Togo. Description officielle en cours de rédaction"),
+                 "latitude": data_touristique.get("latitude", 6.1311), # Coordonnées par défaut (ex: Lomé)
+                 "longitude": data_touristique.get("longitude", 1.2227),
+                 "source": "ai_fallback" # Indique que la donnée provient exclusivement de l'IA
+            }
+
+        return {
+                "prediction_status": "success",
+                "data": donnees_finales
+        }
+    
+    
+    
