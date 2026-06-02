@@ -131,4 +131,27 @@ def get_hotel_proche(
 
 @app.post("/predict", dependencies=[Depends(verifier_cle_api)])
 async def predict_monument(file: UploadFile = File(..., description="photo prise par le touriste")):
-    
+    """
+    Reçoit l'image envoyée par un utilisateur, l'analyse avec l'IA Google Gemini,
+    et tente de faire correspondre le monument détecté avec notre base de données locale.
+    Cette route est protégée par notre dépendance de clé API (verifier_cle_api).
+    """
+    # 1. Validation du type de fichier (uniquement des images)
+    if not file.content_type.startswith("image/"):
+        raise HTTPException(status_code=400, detail="le fichier doit etre une image")
+
+    try:
+        # Lecture du flux de données binaires de l'image
+        image_bytes = await file.read()
+
+        # 2. Sécurité : Validation de la taille maximale (10 Mo) pour éviter les saturations mémoire
+        max_file_size = 10 * 1024 * 1024
+        if len(image_bytes) > max_file_size:
+            raise HTTPException(status_code=413, detail="L'image est trop lourd, la taille maximale est 10 Mo")
+
+        # Conversion des octets binaires en un objet Image    manipulable par Pillow
+        image = Image.open(io.BytesIO(image_bytes))
+
+        # 3. Optimisation : Redimensionnement de l'image (max 1024px) pour accélérer l'envoi vers Gemini
+        max_size = 1024
+        image.thumbnail((max_size, max_size), Image.Resampling.LANCZOS)
