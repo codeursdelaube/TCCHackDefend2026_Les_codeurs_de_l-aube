@@ -175,3 +175,17 @@ async def predict_monument(file: UploadFile = File(..., description="photo prise
             model='gemini-2.5-flash',
             contents=[image, prompt]
         )
+
+        # 6. Nettoyage de la réponse IA pour enlever d'éventuels blocs de code Markdown (```json ... ```)
+
+        texte_brut = response.text.strip()
+        if texte_brut.startswith("```json"):
+            texte_brut = texte_brut.replace("```json", "").replace("```", "").strip()
+        elif texte_brut.startswith("```"):
+            texte_brut = texte_brut.replace("```", "").strip()
+
+        # Conversion de la chaîne de texte nettoyée en un dictionnaire Python
+        data_touristique = json.loads(texte_brut)
+        data_tour = data_touristique.get("monument", "").lower()
+
+        donnees_finales = None
