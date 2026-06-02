@@ -30,4 +30,7 @@ class Settings(BaseSettings):
     # Instanciation des paramètres pour une utilisation globale
 settings = Settings()
 
+# Initialisation de l'application FastAPI
+app = FastAPI(title="heritogo_backend")
+
 
