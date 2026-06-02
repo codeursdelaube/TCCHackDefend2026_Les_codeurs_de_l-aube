@@ -155,3 +155,16 @@ async def predict_monument(file: UploadFile = File(..., description="photo prise
         # 3. Optimisation : Redimensionnement de l'image (max 1024px) pour accélérer l'envoi vers Gemini
         max_size = 1024
         image.thumbnail((max_size, max_size), Image.Resampling.LANCZOS)
+
+        prompt = """
+        Agis en tant que guide expert du Togo. Analyse cette photo touristique.
+        Identifie le monument ou le lieu (ex: Monument de l'Indépendance, Colombe de la Paix, Palais de Lomé, Tata Tamberma, Grand Marché).
+
+        Tu dois renvoyer TOUJOURS une histoire courte (3 lignes maximum) au cas où le lieu n'est pas dans notre base.
+
+        Réponds STRICTEMENT au format JSON suivant, sans balises Markdown :
+        {
+            "monument": "Nom officiel du lieu",
+            "histoire": "Histoire ou description culturelle rapide en français."
+        }
+        """
