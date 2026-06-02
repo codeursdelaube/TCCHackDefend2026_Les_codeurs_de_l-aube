@@ -220,4 +220,14 @@ async def predict_monument(file: UploadFile = File(..., description="photo prise
         }
     
     
+        # Gestion des exceptions spécifiques
+    except json.JSONDecodeError:
+        # Erreur levée si Gemini renvoie du texte standard au lieu du format JSON demandé
+        raise HTTPException(status_code=500, detail="Format JSON invalide gemini ne peut pas le renvoyé")
+    except Exception as e:
+        # Capture de toute autre erreur (problème réseau, API Key expirée, erreur Pillow...)
+        raise HTTPException(status_code=500, detail=f"Erreur lors de l'analyse avec Gemini : {str(e)}")
+    
+
+    
     
