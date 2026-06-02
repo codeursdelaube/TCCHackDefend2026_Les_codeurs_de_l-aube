@@ -49,3 +49,23 @@ app.add_middleware(
     allow_methods=["*"], # Autorise toutes les méthodes HTTP (GET, POST, PUT, DELETE, etc.)
     allow_headers=["*"], # Autorise tous les en-têtes HTTP de requêtes
 )
+
+# ==========================================
+# 3. SÉCURISATION DES ROUTES (API KEY)
+# ==========================================
+
+cle_api = "herit" # Nom de l'en-tête (Header) attendu dans la requête HTTP (ex: herit: votre_cle_api)
+api_key_header = api_key.APIKeyHeader(name=cle_api, auto_error=False)
+
+def verifier_cle_api(api_key_recue: str = Depends(api_key_header)):
+    """
+    Dépendance de sécurité chargeant et vérifiant la présence de la clé API.
+    Compare la clé fournie dans le header avec celle définie dans le fichier .env.
+    """
+    if api_key_recue == settings.api_secret_key:
+        return api_key_recue
+# Si la clé est incorrecte ou absente, on bloque immédiatement la requête
+    raise HTTPException(
+    status_code=403,
+    detail="Accès interdit: Clé API invalide ou manquante"
+    )
