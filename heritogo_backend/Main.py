@@ -229,5 +229,6 @@ async def predict_monument(file: UploadFile = File(..., description="photo prise
         raise HTTPException(status_code=500, detail=f"Erreur lors de l'analyse avec Gemini : {str(e)}")
     
 
+
     
-    
+  
