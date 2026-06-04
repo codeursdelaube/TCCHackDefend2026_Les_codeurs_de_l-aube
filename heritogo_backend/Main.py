@@ -7,7 +7,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 from fastapi.middleware.cors import CORSMiddleware
 from PIL import Image
 from google import genai
-from haversine import calcul_de_l_haversine
+from haversine import calcul_de_l_haversine 
 from fastapi import Security, Depends
 from fastapi.security import api_key
 
