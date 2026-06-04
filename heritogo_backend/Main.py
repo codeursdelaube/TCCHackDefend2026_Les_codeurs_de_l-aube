@@ -143,6 +143,13 @@ async def predict_monument(file: UploadFile = File(..., description="photo prise
         raise HTTPException(status_code=400, detail="le fichier doit etre une image")
 
     try:
+
+        # ----------------========================================
+        # BOUCLIER 1 : FILTRAGE GÉOGRAPHIQUE GPS (Zéro Appel IA)
+        # ----------------========================================
+
+        
+
         # Lecture du flux de données binaires de l'image
         image_bytes = await file.read()
 
