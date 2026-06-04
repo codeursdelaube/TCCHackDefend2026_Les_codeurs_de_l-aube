@@ -148,7 +148,23 @@ async def predict_monument(file: UploadFile = File(..., description="photo prise
         # BOUCLIER 1 : FILTRAGE GÉOGRAPHIQUE GPS (Zéro Appel IA)
         # ----------------========================================
 
-        
+        if lat is not None and long is not None:
+            for m in BASE_MONUMENT:
+              # Si l'appareil est à moins de 300 mètres (0.3 km) d'un monument de notre JSON 
+                distance_user_monument = calcul_de_l_haversine(lat, long, m["latitude"], m["longitude"])
+                if distance_user_monument <= 0.3:
+                    return {
+                        "prediction_status": "success",
+                        "data": {
+                            "monument": m["nom"],
+                            "histoire": m["histoire"],
+                            "localite": m["localite"],
+                            "region": m["region"],
+                            "latitude": m["latitude"],
+                            "longitude": m["longitude"],
+                            "source": "gps_local_database"
+                        }
+                    }
 
         # Lecture du flux de données binaires de l'image
         image_bytes = await file.read()
