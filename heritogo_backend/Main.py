@@ -260,17 +260,6 @@ async def predict_monument(file: UploadFile = File(..., description="photo prise
                 break
         # 8. Système de secours (Fallback) : Si non trouvé en base locale, on adopte les coordonnées génériques du Togo
 
-        if not donnees_finales:
-             donnees_finales = {
-                 "monument": data_touristique.get("monument", "Monument inconnu"),
-                 "histoire": data_touristique.get("histoire", "Monument identifié au Togo. Description officielle en cours de rédaction"),
-                 "localite": data_touristique.get("localite", "Inconnue"),
-                 "region": data_touristique.get("region", "Inconnue"),
-                 "latitude": data_touristique.get("latitude", 6.1311), # Coordonnées par défaut (ex: Lomé)
-                 "longitude": data_touristique.get("longitude", 1.2227),
-                 "source": "ai_fallback" # Indique que la donnée provient exclusivement de l'IA
-            }
-             
         # Sauvegarde du résultat dans notre cache textuel global
         CACHE_MONUMENTS_TEXTE[data_tour] = donnees_finales
 
