@@ -106,6 +106,20 @@ class hotel(BaseModel):
     longitude: float
     prix_nuit: int
 
+class resto(BaseModel):
+    id: int
+    nom: str
+    quartier: str
+    adresse: str
+    telephone: int
+    latitude: float
+    longitude: float
+    horaire: str
+    budget_fcfa: int
+    plat: str
+
+
+
 @app.get("/monument", response_model=List[Monument])
 def get_Monument():
     """ Récupère la liste complète des monuments du Togo stockés en local """
