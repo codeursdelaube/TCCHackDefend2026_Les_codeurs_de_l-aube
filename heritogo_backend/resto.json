@@ -264,7 +264,7 @@
     "longitude": 1.2200,
     "horaires": "12h – 23h (7j/7)",
     "budget_fcfa": "3000 – 10000",
-    "plats_ids": [
+    "plats": [
       "fufu_togolais", "vebe_togolais", "gboma_dessi",
       "adzeme_togolais", "ablo_togolais"
     ]

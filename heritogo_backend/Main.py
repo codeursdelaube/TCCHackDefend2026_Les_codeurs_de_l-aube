@@ -116,7 +116,7 @@ class resto(BaseModel):
     longitude: float
     horaire: str
     budget_fcfa: int
-    plat: str
+    plats: str
 
 
 
