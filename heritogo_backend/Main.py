@@ -83,7 +83,7 @@ with open("hotel.json", "r", encoding="utf-8") as fichier_hotel:
     BASE_HOTEL = json.load(fichier_hotel)
 
 # À ajouter sous le chargement de hotel.json
-with open("restaurant.json", "r", encoding="utf-8") as fichier_resto:
+with open("resto.json", "r", encoding="utf-8") as fichier_resto:
     BASE_RESTO = json.load(fichier_resto)
 
 # Cache global en mémoire pour mémoriser les résultats textuels de l'IA
