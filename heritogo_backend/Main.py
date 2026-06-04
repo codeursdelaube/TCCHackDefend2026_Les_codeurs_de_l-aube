@@ -190,7 +190,7 @@ async def predict_monument(file: UploadFile = File(..., description="photo prise
 
         # On crée une version texte simplifiée de ton JSON pour ne pas surcharger le prompt
 
-        catalogue_officiel = [{"nom": m["nom"], "histoire": m["histoire"], "localite": m["localite"]} for m in BASE_MONUMENT]
+        catalogue_officiel = [{"nom": m["nom"], "localite": m["localite"]} for m in BASE_MONUMENT]
         catalogue_str = json.dumps(catalogue_officiel, ensure_ascii=False)
 
         prompt = f"""
