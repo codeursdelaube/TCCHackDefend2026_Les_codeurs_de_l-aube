@@ -66,8 +66,8 @@ def verifier_cle_api(api_key_recue: str = Depends(api_key_header)):
         return api_key_recue
 # Si la clé est incorrecte ou absente, on bloque immédiatement la requête
     raise HTTPException(
-            status_code=403,
-            detail="Accès interdit: Clé API invalide ou manquante"
+        status_code=403,
+        detail="Accès interdit: Clé API invalide ou manquante"
     )
 
 # ==========================================
@@ -132,7 +132,7 @@ def get_hotel_proche(
     return hotel_tries
 
 @app.post("/predict", dependencies=[Depends(verifier_cle_api)])
-async def predict_monument(file: UploadFile = File(..., description="photo prise par le touriste")):
+async def predict_monument(file: UploadFile = File(..., description="photo prise par le touriste"), lat: Optional[float] = Query(None, description="Latitude actuelle du touriste"), long: Optional[float] = Query(None, description="Longitude actuelle du touriste")):
     """
     Reçoit l'image envoyée par un utilisateur, l'analyse avec l'IA Google Gemini,
     et tente de faire correspondre le monument détecté avec notre base de données locale.
@@ -160,17 +160,16 @@ async def predict_monument(file: UploadFile = File(..., description="photo prise
 
         prompt = """
         Agis en tant que guide expert du Togo. Analyse cette photo touristique.
-        Identifie le monument ou le lieu (ex: Monument de l'Indépendance, Colombe de la Paix, Palais de Lomé, Tata Tamberma, Grand Marché).
-
-        Tu dois renvoyer TOUJOURS une histoire qui se trouve  dans notre base.
+        Identifie s'il s'agit d'un monument historique, d'un site touristique ou d'un édifice architectural remarquable situé au Togo.
         
-        si tu ne reconnait pas cet histoire alors renvoie : monument non répertorier.
-
-        Réponds STRICTEMENT au format JSON suivant, sans balises Markdown :
+        Règles de filtrage strictes :
+        1. Si tu as le moindre doute majeur ou si l'image ne montre aucun élément du patrimoine culturel, architectural ou historique du Togo, ne devine rien et renvoie exactement "nom_probable": "".
+        2. Réponds STRICTEMENT au format JSON brut suivant, sans balises de bloc Markdown (pas de ```json), sans texte explicatif autour :
         {
-            "monument": "Nom officiel du lieu",
+            "est_monument": true ou false,
+            "nom_probable": "Nom officiel du lieu ou chaine vide si inconnu",
             "histoire": "Histoire ou description culturelle rapide en français.",
-            "localité": "localité dans lequel le monument se trouve",
+            "localite": "localité dans laquelle le monument se trouve",
             "region": "region dans laquelle se trouve le monument"
         }
         """
@@ -209,8 +208,8 @@ async def predict_monument(file: UploadFile = File(..., description="photo prise
                     "latitude": m["latitude"],
                     "longitude": m["longitude"],
                     "source": "local_database" # Indique que la donnée vient du fichier local sûr
-            }
-             break
+                }
+                break
         # 8. Système de secours (Fallback) : Si non trouvé en base locale, on adopte les coordonnées génériques du Togo
 
         if not donnees_finales:
