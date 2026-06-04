@@ -82,6 +82,9 @@ with open("monument.json", "r", encoding="utf-8") as fichier:
 with open("hotel.json", "r", encoding="utf-8") as fichier_hotel:
     BASE_HOTEL = json.load(fichier_hotel)
 
+# Cache global en mémoire pour mémoriser les résultats textuels de l'IA
+CACHE_MONUMENTS_TEXTE = {}
+
 # ==========================================
 # 5. MODÈLES DE DONNÉES (PYDANTIC)
 # ==========================================
