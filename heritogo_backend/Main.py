@@ -105,6 +105,10 @@ class hotel(BaseModel):
     latitude: float
     longitude: float
     prix_nuit: int
+    telephone: int
+    etoiles: int
+    description: str
+    lieux_proches: str
 
 class resto(BaseModel):
     id: int
@@ -114,7 +118,7 @@ class resto(BaseModel):
     telephone: int
     latitude: float
     longitude: float
-    horaire: str
+    horaires: str
     budget_fcfa: int
     plats: str
 
