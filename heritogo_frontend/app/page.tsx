@@ -22,9 +22,9 @@ import 'swiper/css/pagination'
 import { StaticImageData } from 'next/image'
 
 
-/* ─────────────────────────────────────────────────────────────────────────────
+/* 
    TYPES
-───────────────────────────────────────────────────────────────────────────── */
+ */
 interface SlideItem {
   title: string
   subtitle: string
@@ -147,9 +147,9 @@ function FeatureCard({ feature, index }: { feature: FeatureCardItem; index: numb
   )
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
+/* 
    PAGE PRINCIPALE
-───────────────────────────────────────────────────────────────────────────── */
+*/
 export default function AcceuilPage() {
 
   const [activeSlide, setActiveSlide] = useState(0)
@@ -217,9 +217,9 @@ export default function AcceuilPage() {
   ]
 
   const statsData = [
-    { target: 120, suffix: '+', label: 'Sites répertoriés', icon: <MapPin size={18} className="text-green-500" /> },
-    { target: 4800, suffix: '+', label: 'Photos analysées', icon: <Camera size={18} className="text-amber-500" /> },
-    { target: 1200, suffix: '+', label: 'Utilisateurs actifs', icon: <Users size={18} className="text-emerald-500" /> },
+    { target: 7, suffix: '+', label: 'Sites répertoriés', icon: <MapPin size={18} className="text-green-500" /> },
+    { target: 5, suffix: '+', label: 'Photos analysées', icon: <Camera size={18} className="text-amber-500" /> },
+    { target: 4, suffix: '+', label: 'Utilisateurs actifs', icon: <Users size={18} className="text-emerald-500" /> },
     { target: 4, suffix: '.8★', label: 'Note moyenne', icon: <Star size={18} className="text-yellow-400" /> }
   ]
 
@@ -280,11 +280,11 @@ export default function AcceuilPage() {
   return (
     <main className="relative min-h-screen w-full overflow-x-hidden bg-base-100">
 
-      {/* ═══════════════════════════════════════════════════════════════════════
+      {/* 
           SECTION 1 — HERO CARROUSEL PLEIN ÉCRAN
           Animations gérées via Framer Motion + état activeSlide
           (plus fiable que les classes CSS Swiper)
-      ═══════════════════════════════════════════════════════════════════════ */}
+      */}
       <section className="relative h-screen w-full overflow-hidden">
         <Swiper
           spaceBetween={0}
@@ -312,7 +312,7 @@ export default function AcceuilPage() {
               </div>
 
               {/* Overlay dégradé — toujours sombre pour lisibilité */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/10 z-10" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/85 via-black/45 to-black/10 z-10" />
 
               {/* Grain subtil */}
               <div className="absolute inset-0 z-10 opacity-[0.03]"
@@ -376,7 +376,7 @@ export default function AcceuilPage() {
                 <Link href={slides[activeSlide].buttonLink}>
                   <button className={`
                     btn btn-lg rounded-full px-8 border-none text-white font-bold
-                    bg-gradient-to-r ${slides[activeSlide].accent}
+                    bg-linear-to-r ${slides[activeSlide].accent}
                     hover:scale-105 active:scale-95
                     shadow-2xl transition-all duration-200
                     flex items-center gap-2
@@ -419,10 +419,10 @@ export default function AcceuilPage() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════════════════════
+      {/* 
           SECTION 2 — BANDE STATS
           Compteurs animés pour crédibiliser l'app
-      ═══════════════════════════════════════════════════════════════════════ */}
+     */}
       <section className="bg-base-200 border-y border-base-content/8 py-10">
         <div className="max-w-4xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-0">
           {statsData.map((stat, i) => (
@@ -440,10 +440,10 @@ export default function AcceuilPage() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════════════════════
+      {/* 
           SECTION 3 — FONCTIONNALITÉS
           Cards avec animations scroll-triggered
-      ═══════════════════════════════════════════════════════════════════════ */}
+      */}
       <section
         id="fonctionnalites"
         className="relative py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto scroll-mt-6"
@@ -501,7 +501,7 @@ export default function AcceuilPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="relative overflow-hidden rounded-3xl border border-base-content/8
-                     bg-gradient-to-r from-base-200 via-emerald-500/5 to-base-200 p-7 md:p-8"
+                     bg-linear-to-r from-base-200 via-emerald-500/5 to-base-200 p-7 md:p-8"
         >
           <div className="absolute inset-0 opacity-[0.015]"
                style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h60v60H0z' fill='none'/%3E%3Ccircle cx='30' cy='30' r='1' fill='%23fff'/%3E%3C/svg%3E\")" }} />
@@ -536,10 +536,10 @@ export default function AcceuilPage() {
         </motion.div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════════════════════
+      {/* 
           SECTION 4 — COMMENT ÇA MARCHE
           Parcours utilisateur en 3 étapes
-      ═══════════════════════════════════════════════════════════════════════ */}
+      */}
       <section className="py-24 px-4 sm:px-6 bg-base-200 border-t border-base-content/8">
         <div className="max-w-5xl mx-auto">
           {/* En-tête */}
@@ -556,7 +556,7 @@ export default function AcceuilPage() {
           <div className="relative grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Ligne de connexion (desktop) */}
             <div className="hidden md:block absolute top-12 left-[17%] right-[17%] h-px
-                            bg-gradient-to-r from-transparent via-base-content/15 to-transparent" />
+                            bg-linear-to-r from-transparent via-base-content/15 to-transparent" />
 
             {howItWorks.map((step, i) => (
               <motion.div
@@ -597,7 +597,7 @@ export default function AcceuilPage() {
           >
             <Link href="/scan">
               <button className="btn btn-lg rounded-full px-10 border-none text-white font-bold
-                                 bg-gradient-to-r from-emerald-500 via-green-600 to-teal-500
+                                 bg-linear-to-r from-emerald-500 via-green-600 to-teal-500
                                  hover:scale-105 active:scale-95
                                  shadow-xl shadow-green-500/20 transition-all duration-200
                                  flex items-center gap-2 mx-auto">
@@ -609,10 +609,10 @@ export default function AcceuilPage() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════════════════════
+      {/* 
           CTA FLOTTANT — apparaît après scroll du hero
           Donne un accès permanent à l'action principale
-      ═══════════════════════════════════════════════════════════════════════ */}
+     */}
       <AnimatePresence>
         {ctaVisible && (
           <motion.div
@@ -624,7 +624,7 @@ export default function AcceuilPage() {
           >
             <Link href="/scan">
               <button className="btn rounded-full px-5 py-3 h-auto border-none
-                                 bg-gradient-to-r from-emerald-500 to-green-600
+                                 bg-linear-to-r from-emerald-500 to-green-600
                                  text-white font-bold shadow-2xl shadow-green-500/30
                                  hover:scale-105 active:scale-95
                                  transition-all duration-200

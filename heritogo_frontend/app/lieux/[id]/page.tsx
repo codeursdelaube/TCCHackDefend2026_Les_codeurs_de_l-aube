@@ -18,9 +18,9 @@ import hotels from '@/app/nearbyhotels/hotels'
 
 type MonumentWithRegionAlias = { region?: string }
 
-// ─────────────────────────────────────────────────────────────
+
 // Utilitaires de distance
-// ─────────────────────────────────────────────────────────────
+
 function haversine(lat1: number, lng1: number, lat2: number, lng2: number): number {
   const R = 6371
   const toRad = (d: number) => (d * Math.PI) / 180
@@ -36,13 +36,12 @@ function formatDistance(km: number): string {
   return km < 1 ? `${Math.round(km * 1000)} m` : `${km.toFixed(1)} km`
 }
 
-// ─────────────────────────────────────────────────────────────
 // Carte (SSR désactivé)
-// ─────────────────────────────────────────────────────────────
+
 const MapNoSSR = dynamic(() => import('@/app/_components/Carte'), {
   ssr: false,
   loading: () => (
-    <div className="w-full h-[280px] rounded-2xl bg-base-300 flex items-center justify-center border border-base-content/10">
+    <div className="w-full h-70 rounded-2xl bg-base-300 flex items-center justify-center border border-base-content/10">
       <div className="flex flex-col items-center gap-3">
         <div className="w-7 h-7 border-[3px] border-success border-t-transparent rounded-full animate-spin" />
         <p className="text-xs text-base-content/40 font-medium">Chargement de la carte…</p>
@@ -55,9 +54,9 @@ interface PageProps {
   params: Promise<{ id: string }>
 }
 
-// ─────────────────────────────────────────────────────────────
+
 // TTS Button
-// ─────────────────────────────────────────────────────────────
+
 function TTSButton({ text, label }: { text: string; label: string }) {
   const [speaking, setSpeaking] = useState(false)
   const toggle = () => {
@@ -81,9 +80,9 @@ function TTSButton({ text, label }: { text: string; label: string }) {
   )
 }
 
-// ─────────────────────────────────────────────────────────────
+
 // Share Button
-// ─────────────────────────────────────────────────────────────
+
 function ShareButton({ nom }: { nom: string; lat: number; lng: number }) {
   const [copied, setCopied] = useState(false)
   const share = async () => {
@@ -106,9 +105,9 @@ function ShareButton({ nom }: { nom: string; lat: number; lng: number }) {
   )
 }
 
-// ─────────────────────────────────────────────────────────────
+
 // PAGE PRINCIPALE
-// ─────────────────────────────────────────────────────────────
+ 
 export default function SiteDetailPage({ params }: PageProps) {
   const resolvedParams = use(params)
   const site = monuments.find((m) => m.id === resolvedParams.id)
@@ -144,11 +143,11 @@ export default function SiteDetailPage({ params }: PageProps) {
   return (
     <main className="relative min-h-screen w-full bg-base-100 text-base-content overflow-x-hidden">
 
-      {/* ================= HERO ================= */}
-      <section className="relative h-[55vh] min-h-[360px] w-full overflow-hidden">
+      {/* HERO  */}
+      <section className="relative h-[55vh] min-h-90 w-full overflow-hidden">
         <Image src={site.image} alt={site.nom} fill priority sizes="100vw"
           className="object-cover object-center scale-[1.02] hover:scale-100 transition-transform duration-[2s]" />
-        <div className="absolute inset-0 bg-gradient-to-t from-base-100 via-black/30 to-black/20" />
+        <div className="absolute inset-0 bg-linear-to-t from-base-100 via-black/30 to-black/20" />
 
         <div className="absolute top-0 left-0 right-0 z-20 pt-6 px-4 sm:px-8 flex items-center justify-between">
           <Link href="/lieux">
@@ -196,7 +195,7 @@ export default function SiteDetailPage({ params }: PageProps) {
               <a href={googleMapsUrl} target="_blank" rel="noopener noreferrer">
                 <button className="inline-flex items-center gap-2 px-4 py-2 rounded-full
                                    text-xs font-bold border-none text-white
-                                   bg-gradient-to-r from-emerald-500 to-green-600
+                                   bg-linear-to-r from-emerald-500 to-green-600
                                    hover:scale-105 active:scale-95
                                    shadow-md shadow-green-500/20 transition-all duration-200">
                   <Navigation size={13} /> {"S'y rendre"}
@@ -248,7 +247,7 @@ export default function SiteDetailPage({ params }: PageProps) {
                         <div className="relative h-24 w-full overflow-hidden">
                           <Image src={v.image} alt={v.nom} fill sizes="200px"
                             className="object-cover group-hover:scale-105 transition-transform duration-500" />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                          <div className="absolute inset-0 bg-linear-to-t from-black/50 to-transparent" />
                         </div>
                         <div className="p-3 flex items-center justify-between">
                           <p className="text-xs font-bold text-base-content group-hover:text-green-500
@@ -338,7 +337,7 @@ export default function SiteDetailPage({ params }: PageProps) {
             <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.44 }}>
               <a href={googleMapsUrl} target="_blank" rel="noopener noreferrer" className="block">
                 <button className="w-full btn rounded-2xl border-none text-white font-bold
-                                   bg-gradient-to-r from-emerald-500 via-green-600 to-teal-500
+                                   bg-linear-to-r from-emerald-500 via-green-600 to-teal-500
                                    hover:scale-[1.02] active:scale-[0.98]
                                    shadow-xl shadow-green-500/20 transition-all duration-200
                                    flex items-center justify-center gap-2 py-4">
@@ -350,7 +349,7 @@ export default function SiteDetailPage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* ================= SECTION HÔTELS PROCHES / FALLBACK ================= */}
+      {/* SECTION HÔTELS PROCHES / FALLBACK  */}
       {(hotelsProches.length > 0 || hotelsFallback.length > 0) && (
         <section id="hotels" className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 mt-2 scroll-mt-6">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10">

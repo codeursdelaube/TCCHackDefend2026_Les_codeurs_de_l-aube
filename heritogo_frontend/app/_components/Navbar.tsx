@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Menu, ScanLine, Compass, UtensilsCrossed, Home, type LucideIcon, Moon, Sun } from 'lucide-react'
+import { Menu, ScanLine, Compass, UtensilsCrossed, Home, Sparkles, type LucideIcon, Moon, Sun } from 'lucide-react'
 
 interface NavLinkItem {
   href: string;
@@ -18,6 +18,8 @@ export default function Navbar() {
     { href: '/scan', label: 'Scanner', icon: ScanLine },
     { href: '/lieux', label: 'Lieux', icon: Compass },
     { href: '/cuisine', label: 'Cuisine', icon: UtensilsCrossed },
+    // 🎡 AJOUT : Lien vers la page Parc d'attraction et Zoo
+    { href: '/loisirs', label: 'Parcs& Zoos', icon: Sparkles },
   ]
 
   const isActive = (path: string): boolean => pathname === path
@@ -99,7 +101,7 @@ export default function Navbar() {
           {/* Toggle Dark/Light */}
           <label className="flex cursor-pointer items-center gap-1.5">
             {/* Icône Soleil */}
-            <Sun/>
+            <Sun className="h-4 w-4 text-amber-400" />
 
             <input
               type="checkbox"
@@ -108,7 +110,7 @@ export default function Navbar() {
             />
 
             {/* Icône Lune */}
-            <Moon/>
+            <Moon className="h-4 w-4 text-slate-300" />
           </label>
 
           {/* Bouton Scan */}

@@ -45,10 +45,10 @@ export default async function PlatDetailPage({ params }: PageProps) {
   return (
     <main className="relative min-h-screen w-full bg-base-100 text-base-content overflow-x-hidden">
 
-      {/* ══════════════════════════════════════════════════════
+      {/* 
           HERO IMAGE PLEIN ÉCRAN
-      ══════════════════════════════════════════════════════ */}
-      <section className="relative h-[55vh] min-h-[360px] w-full overflow-hidden">
+      */}
+      <section className="relative h-[55vh] min-h-90 w-full overflow-hidden">
         <Image
           src={plat.image}
           alt={plat.nom}
@@ -57,7 +57,7 @@ export default async function PlatDetailPage({ params }: PageProps) {
           sizes="100vw"
           className="object-cover object-center scale-[1.02] hover:scale-100 transition-transform duration-[2s]"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-base-100 via-black/35 to-black/15" />
+        <div className="absolute inset-0 bg-linear-to-t from-base-100 via-black/35 to-black/15" />
 
         {/* Nav dans le hero */}
         <div className="absolute top-0 left-0 right-0 z-20 pt-6 px-4 sm:px-8
@@ -92,9 +92,9 @@ export default async function PlatDetailPage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════
+      {/* 
           CONTENU PRINCIPAL
-      ══════════════════════════════════════════════════════ */}
+     */}
       <section className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-20">
 
         {/* Halos */}
@@ -112,7 +112,7 @@ export default async function PlatDetailPage({ params }: PageProps) {
               <a href="#restaurants">
                 <button className="inline-flex items-center gap-2 px-4 py-2 rounded-full
                                    text-xs font-bold border-none text-white
-                                   bg-gradient-to-r from-emerald-500 to-green-600
+                                   bg-linear-to-r from-emerald-500 to-green-600
                                    hover:scale-105 active:scale-95
                                    shadow-md shadow-emerald-500/20 transition-all duration-200">
                   <Utensils size={13} />
@@ -307,7 +307,7 @@ export default async function PlatDetailPage({ params }: PageProps) {
                             sizes="200px"
                             className="object-cover group-hover:scale-105 transition-transform duration-500"
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                          <div className="absolute inset-0 bg-linear-to-t from-black/50 to-transparent" />
                         </div>
                         <div className="p-3 flex items-center justify-between">
                           <p className="text-xs font-bold text-base-content
@@ -399,7 +399,7 @@ export default async function PlatDetailPage({ params }: PageProps) {
             {/* CTA scroll vers restaurants */}
             <a href="#restaurants" className="block">
               <button className="w-full btn rounded-2xl border-none text-white font-bold
-                                 bg-gradient-to-r from-emerald-500 via-green-600 to-teal-500
+                                 bg-linear-to-r from-emerald-500 via-green-600 to-teal-500
                                  hover:scale-[1.02] active:scale-[0.98]
                                  shadow-xl shadow-emerald-500/20 transition-all duration-200
                                  flex items-center justify-center gap-2 py-4">

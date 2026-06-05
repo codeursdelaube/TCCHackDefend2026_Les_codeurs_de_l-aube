@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect, useActionState, startTransition } from 'react'
-import { Camera, Upload, Sparkles, Loader2, Volume2, VolumeX, MapPin, Globe, RefreshCw } from 'lucide-react'
+import { Camera, Upload, Sparkles, Loader2, Volume2, VolumeX, MapPin, RefreshCw } from 'lucide-react'
 import Image from 'next/image'
 
 interface PredictionResult {
@@ -24,10 +24,10 @@ export default function ScanPage() {
   const [isSpeaking, setIsSpeaking] = useState<boolean>(false)
   const [selectedLang, setSelectedLang] = useState<string>('fr-FR')
   
-  // 🆕 État pour stocker la position GPS en temps réel du touriste
+  //  État pour stocker la position GPS en temps réel du touriste
   const [userLocation, setUserLocation] = useState<{ lat: number; long: number } | null>(null)
 
-  // 🆕 Récupération automatique du GPS au chargement de l'application
+  //  Récupération automatique du GPS au chargement de l'application
   useEffect(() => {
     if (typeof window !== 'undefined' && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -53,7 +53,7 @@ export default function ScanPage() {
         const data = await res.json()
         
         if (res.ok) {
-          // 🔴 LE FIX CRUCIAL : Si le backend a répondu "unknown" (ex: chaussure), on l'intercepte comme une erreur visuelle
+          // LE FIX CRUCIAL : Si le backend a répondu "unknown" (ex: chaussure), on l'intercepte comme une erreur visuelle
           if (data.prediction_status === 'unknown') {
             setResult(null) // On nettoie un éventuel ancien résultat valide
             return data.detail || "Ce monument ou objet n'est pas répertorié dans la base officielle HeriTogo."
@@ -88,7 +88,7 @@ export default function ScanPage() {
     const formData = new FormData()
     formData.append('image', image)
     
-    // 🆕 Si le GPS est disponible, on l'injecte pour activer le Bouclier 1 du Backend
+    //  Si le GPS est disponible, on l'injecte pour activer le Bouclier 1 du Backend
     if (userLocation) {
       formData.append('lat', userLocation.lat.toString())
       formData.append('long', userLocation.long.toString())
@@ -212,7 +212,7 @@ export default function ScanPage() {
           />
         </div>
 
-        {/* 🔴 Section d'affichage des erreurs (S'activera magnifiquement pour la chaussure maintenant !) */}
+        {/*  Section d'affichage des erreurs (S'activera magnifiquement pour la chaussure maintenant !) */}
         {error && (
           <div className="alert alert-error mt-4 rounded-2xl
                           bg-error/10 border border-error/20
