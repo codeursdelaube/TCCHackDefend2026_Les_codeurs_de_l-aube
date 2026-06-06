@@ -61,7 +61,7 @@
 ---
 
 ## 📂 Structure du Projet
-
+```
 TCCHackDefend2026_Heritogo/
 ├── heritogo_backend/
 │   ├── Main.py              # Point d'entrée FastAPI
@@ -95,6 +95,7 @@ TCCHackDefend2026_Heritogo/
 ├── postcss.config.mjs
 └── tsconfig.json
 
+```
 ---
 
 ## Installation & Lancement
