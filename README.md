@@ -181,10 +181,10 @@ Aucune installation requise pour tester la version déployée.
 
 | Nom | Rôle | Filière |
 |---|---|---|
-| ADOKOU Koffi Éric | Frontend / Next.js | [Informatique] |
-| AFANOU Kossi tété Samuel | Backend / FastAPI /IA| [Informatique] |
-| ALABI Mbarak | Data  | [Informatique] |
-| HAZOUME gérard wilfried | Data| [Informatique] |
+| ADOKOU Koffi Éric | Frontend / Next.js | Génie logiciel |
+| AFANOU Kossi tété Samuel | Backend / FastAPI /IA| Génie logiciel |
+| ALABI Mbarak | Data  | Génie logiciel |
+| HAZOUME gérard wilfried | Data| réseaux & système informatique |
 
 
 ---
